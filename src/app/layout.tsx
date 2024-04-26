@@ -1,6 +1,7 @@
 import "~/styles/globals.css";
 
 import { Inter } from "next/font/google";
+import Link from "next/link";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -20,7 +21,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`font-sans ${inter.variable}`}>{children}</body>
+      <body className={`font-sans ${inter.variable}`}>
+        <nav className="flex items-center justify-between border-b bg-gray-900 p-4 text-white">
+          <Link href="/" className="text-xl font-semibold  ">
+            Gallery
+          </Link>
+          <Link href="/" className="text-xl font-semibold  ">
+            Sign in
+          </Link>
+        </nav>
+        {children}
+      </body>
     </html>
   );
 }
