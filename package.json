@@ -10,7 +10,7 @@
     "dev": "next dev --turbo",
     "lint": "next lint",
     "start": "next start",
-    "postinstall": "npm "
+    "postinstall": "npm run build"
   },
   "dependencies": {
     "@t3-oss/env-nextjs": "^0.10.1",
