@@ -1,32 +1,24 @@
-import Link from "next/link";
-import Image from "next/image";
-const mockImageUrlIds = [
-  "9083c6ee-e4c9-4c74-aaa3-a39d1c9173ef-jql0t1.jpg",
-  "f746e37d-d0f5-44e3-8236-4ba617a15fd4-f2iq3p.jpg",
-  "410a5bdc-7c57-4242-bb63-dcba6262a56b-1d4zp5.jpg",
-  "2298fbec-6a0e-4ece-b69f-79066f8c60d2-vi2rk6.jpg",
-  "547372fb-ae88-4cbc-a446-6dd474d2176e-vi2rk6.png",
-];
-type DataType = {
-  id: number;
-  url: string;
-};
-const mockImageUrls = mockImageUrlIds.map((id, index) => {
-  return {
-    id: index + 1,
-    url: "https://utfs.io/f/" + id,
-  };
-});
-export default function HomePage() {
-  return (
-    <main className="mx-auto flex flex-row flex-wrap gap-4 bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white max-md:justify-center">
-      {mockImageUrls.map((img: DataType) => {
-        return (
-          <div className="" key={img.id}>
-            <img src={img.url} alt="img.text" width={300} height={200} />
-          </div>
-        );
-      })}
-    </main>
-  );
+
+
+
+const colors = ['red','blue','yellow','pink'].map(el=>`bg-${el}-500`)
+export default async function  HomePage() {
+ 
+ return <div className=" flex flex-row  gap-2 justify-center w-[97%] mt-3 mx-auto flex-wrap ">
+  {colors.map((el,i)=>{
+    return <div key={i+1} className="max-min-sm:max-w-full  bg-white max-w-[200px]  dark:bg-slate-800 rounded-lg px-6 py-8 ring-1 ring-slate-900/5 shadow-md hover:shadow-xl opacity-90 hover:opacity-100 hover:scale-[1.02] transition-all">
+  <div>
+    <div className=" bg-red-500 hidden bg-blue-500 bg-yellow-500 bg-pink-500"></div>
+    <span className={ `inline-flex items-center justify-center p-2 rounded-md shadow-lg ${el}`}>
+      <svg className="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"></svg>
+    </span>
+  </div>
+  <h3 className="text-slate-900 dark:text-white mt-5  text-base font-medium tracking-tight">Writes Upside-Down</h3>
+  <p className="text-slate-500 dark:text-slate-400 mt-2 text-sm">
+    The Zero Gravity Pen can be used to write in any orientation, including upside-down. It even works in outer space.
+  </p>
+</div>
+  })}
+
+ </div>
 }

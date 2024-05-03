@@ -13,8 +13,11 @@
   },
   "dependencies": {
     "@t3-oss/env-nextjs": "^0.10.1",
+    "async-g-i-s": "^1.5.2",
+    "axios": "^1.6.8",
     "drizzle-orm": "^0.29.4",
     "next": "^14.2.1",
+    "next-themes": "^0.3.0",
     "postgres": "^3.4.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",

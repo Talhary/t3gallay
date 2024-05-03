@@ -2,6 +2,7 @@ import "~/styles/globals.css";
 
 import { Inter } from "next/font/google";
 import Link from "next/link";
+import { Providers } from "./providers";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -21,6 +22,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      
       <body className={`font-sans ${inter.variable}`}>
         <nav className="flex items-center justify-between border-b bg-gray-900 p-4 text-white">
           <Link href="/" className="text-xl font-semibold  ">
@@ -30,8 +32,11 @@ export default function RootLayout({
             Sign in
           </Link>
         </nav>
+        <Providers>
         {children}
+        </Providers>
       </body>
+      
     </html>
   );
 }
