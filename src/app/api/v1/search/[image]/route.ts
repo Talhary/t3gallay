@@ -1,6 +1,6 @@
 import { NextApiRequest } from "next";
 import axios from 'axios'
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import gis from "async-g-i-s";
 
 const getImages = async (text:string)=>{
@@ -14,7 +14,7 @@ const getImages = async (text:string)=>{
      })
      return data
 }
-export const GET = async(req:any,{params}:{params:any})=>{
+export const GET = async(req:NextRequest,{params}:{params:any})=>{
    const  url = new URL(req?.url as string)
    const imageSearch = new URLSearchParams(url.searchParams).get('image')
    if(!imageSearch){
