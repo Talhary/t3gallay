@@ -18,11 +18,14 @@ import {
  */
 export const createTable = pgTableCreator((name) => `t3gallay_${name}`);
 
-export const posts = createTable(
-  "post",
+export const dialogs = createTable(
+  "dialog",
   {
     id: serial("id").primaryKey(),
-    name: varchar("name", { length: 256 }),
+    imageUrl:varchar("imageUrl", { length: 1024 }),
+    name: varchar("name", { length: 256 }).notNull(),
+    paragraph: varchar("paragraph", { length: 2024 }).notNull(),
+    color: varchar("color", { length: 50 }).notNull(),
     createdAt: timestamp("created_at")
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
@@ -32,3 +35,5 @@ export const posts = createTable(
     nameIndex: index("name_idx").on(example.name),
   })
 );
+
+

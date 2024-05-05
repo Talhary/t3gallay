@@ -22,8 +22,7 @@ export const GET = async(req:NextRequest,{params}:{params:any})=>{
         status:'400',
         message:'Please provide image param'
     })
-   }
-    const results = await getImages(imageSearch);
+   } const results = await getImages(imageSearch);
     if(!results.image_results){
         return NextResponse.json({
         status:'404',

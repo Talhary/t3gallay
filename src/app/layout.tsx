@@ -3,11 +3,11 @@ import "~/styles/globals.css";
 import { Inter } from "next/font/google";
 import Link from "next/link";
 import { Providers } from "./providers";
-
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
 });
+
 
 export const metadata = {
   title: "Create T3 App",
@@ -15,22 +15,26 @@ export const metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
-export default function RootLayout({
+export  default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       
       <body className={`font-sans ${inter.variable}`}>
         <nav className="flex items-center justify-between border-b bg-gray-900 p-4 text-white">
           <Link href="/" className="text-xl font-semibold  ">
             Gallery
           </Link>
-          <Link href="/" className="text-xl font-semibold  ">
+          <div>
+            <Link href="/" className="text-xl font-semibold  ">
             Sign in
-          </Link>
+           </Link>
+        
+          </div>
         </nav>
         <Providers>
         {children}
