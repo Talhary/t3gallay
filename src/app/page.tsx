@@ -22,7 +22,7 @@ export default async function HomePage() {
         <ThemeChange />
       </div>
 
-      <div className=" mx-auto mt-3 flex w-[97%] flex-row flex-wrap items-start justify-start gap-2 ">
+      <div className=" mx-auto mt-3 flex w-[97%] flex-row flex-wrap items-start justify-center gap-2 max-sm:w-full ">
         {dialogs.map((el, i) => {
           return (
             <div
