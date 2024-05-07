@@ -21,11 +21,12 @@ export const createTable = pgTableCreator((name) => `t3gallay_${name}`);
 export const dialogs = createTable(
   "dialog",
   {
-    id: serial("id").primaryKey(),
-    imageUrl:varchar("imageUrl", { length: 1024 }),
+    id: varchar("id", { length: 40 }).primaryKey(),
+    imageUrl: varchar("imageUrl", { length: 1024 }),
     name: varchar("name", { length: 256 }).notNull(),
     paragraph: varchar("paragraph", { length: 2024 }).notNull(),
     color: varchar("color", { length: 50 }).notNull(),
+    userId: varchar("userId", { length: 50 }).notNull(),
     createdAt: timestamp("created_at")
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
@@ -33,7 +34,5 @@ export const dialogs = createTable(
   },
   (example) => ({
     nameIndex: index("name_idx").on(example.name),
-  })
+  }),
 );
-
-

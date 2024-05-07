@@ -4,10 +4,8 @@ import { CiDark } from "react-icons/ci"
 
 export const ThemeChange = () => {
    const { setTheme, resolvedTheme } = useTheme();
-   console.log(resolvedTheme)
     return (
     <button className="absolute" onClick={()=>{
-        console.log(resolvedTheme)
         if(resolvedTheme == 'dark')
         return setTheme('light')
         setTheme('dark')

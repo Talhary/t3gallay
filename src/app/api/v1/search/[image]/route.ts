@@ -1,7 +1,6 @@
 import { NextApiRequest } from "next";
 import axios from 'axios'
 import { NextRequest, NextResponse } from "next/server";
-import gis from "async-g-i-s";
 
 const getImages = async (text:string)=>{
     const {data} =await axios.get('https://api.serply.io/v1/image/q='+text.split(' ').join('+'), {

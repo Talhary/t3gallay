@@ -1,13 +1,18 @@
 import "~/styles/globals.css";
-
+import {
+  ClerkProvider,
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@clerk/nextjs";
 import { Inter } from "next/font/google";
 import Link from "next/link";
-import { Providers } from "./providers";
+import { Themeroviders } from "./Themeproviders";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
 });
-
 
 export const metadata = {
   title: "Create T3 App",
@@ -15,32 +20,39 @@ export const metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
-export  default function RootLayout({
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-
   return (
-    <html lang="en" suppressHydrationWarning>
-      
-      <body className={`font-sans ${inter.variable}`}>
-        <nav className="flex items-center justify-between border-b bg-gray-900 p-4 text-white">
-          <Link href="/" className="text-xl font-semibold  ">
-            Gallery
-          </Link>
-          <div>
-            <Link href="/" className="text-xl font-semibold  ">
-            Sign in
-           </Link>
-        
-          </div>
-        </nav>
-        <Providers>
-        {children}
-        </Providers>
-      </body>
-      
-    </html>
+    <ClerkProvider>
+      <html lang="en" suppressHydrationWarning>
+        <body className={`font-sans ${inter.variable}`}>
+          <nav className="flex items-center justify-between border-b bg-gray-900 p-4 text-white">
+            <div className="flex items-center gap-x-3">
+              <Link href="/" className="text-xl font-semibold  ">
+                Gallery
+              </Link>
+              <Link
+                href="/upload"
+                className="text-xl font-semibold text-white "
+              >
+                Upload
+              </Link>
+            </div>
+            <div>
+              <SignedOut>
+                <SignInButton />
+              </SignedOut>
+              <SignedIn>
+                <UserButton />
+              </SignedIn>
+            </div>
+          </nav>
+          <Themeroviders>{children}</Themeroviders>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

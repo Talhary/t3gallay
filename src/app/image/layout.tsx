@@ -1,15 +1,12 @@
 // 'use client'
 
-import { Providers } from "../providers"
+import { Providers } from "../Themeproviders";
 
-
-const RootLayout = ({children}:{children:React.ReactNode}) => {
+const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-
-     <Providers >
-    <div >{children}</div>
-</Providers>  
-  
-  )
-}
-export default RootLayout
+    <Providers>
+      <div>{children}</div>
+    </Providers>
+  );
+};
+export default RootLayout;
