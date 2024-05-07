@@ -1,10 +1,10 @@
 # T3-Gallery App
 
-[] - Make it deploy (vercel)
-[] - Scaffold basic ui w/ mock data
-[] - Actually set up database (vercel postgres)
-[] - Attack Database to UI
-[] - Add authentication (w/ clerk)
+[x] - Make it deploy (vercel)
+[x] - Scaffold basic ui w/ mock data
+[x] - Actually set up database (vercel postgres)
+[x] - Attack Database to UI
+[x] - Add authentication (w/ clerk)
 [] - Add image upload
 [] - Add Error handling (w/ Sentry)
 [] - Routing/image page (parallel routes)
