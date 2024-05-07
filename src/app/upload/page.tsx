@@ -1,6 +1,7 @@
 "use client";
 import { useUser } from "@clerk/nextjs";
 import React, { FormEvent, useState } from "react";
+import Link from "next/link";
 import {
   Select,
   SelectContent,
@@ -59,7 +60,7 @@ const UploadData = () => {
     setFormData(updatedFormData);
   };
   const submit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); // Prevent the default form submission behavior
+    // e.preventDefault(); // Prevent the default form submission behavior
     console.log(formData);
     if (!formData.name || !formData.color || !formData.paragraph)
       return setError("Please fill the complete form");
@@ -146,7 +147,12 @@ const UploadData = () => {
               Submit
             </button>
             {pending && <>Please Wait we are working</>}
-            {msg}
+            {msg && (
+              <>
+                <p>{msg}</p>
+                <Link href="/">Head back to Main Page</Link>
+              </>
+            )}
             {error}
           </div>
         </div>
