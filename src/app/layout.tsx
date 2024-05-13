@@ -1,4 +1,6 @@
 import "~/styles/globals.css";
+import "@uploadthing/react/styles.css";
+import { UploadButton } from "../utils/uploadthing";
 import {
   ClerkProvider,
   SignInButton,
@@ -46,6 +48,7 @@ export default function RootLayout({
                 <SignInButton />
               </SignedOut>
               <SignedIn>
+                {/* <UploadButton endpoint="imageUploader" /> */}
                 <UserButton />
               </SignedIn>
             </div>

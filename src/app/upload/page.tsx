@@ -2,6 +2,7 @@
 import { useUser } from "@clerk/nextjs";
 import React, { FormEvent, useState } from "react";
 import Link from "next/link";
+import { Input } from "~/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -21,21 +22,24 @@ type initialStateProps = {
   paragraph: string;
   userId: string;
   color: string;
+  imageId?: string;
 };
 const initialFormState = {
   name: "",
   paragraph: "",
   color: "",
   userId: "",
-};
+  imageId: "",
+} as initialStateProps;
 const UploadData = () => {
   const userId = useUser()?.user?.id;
-  console.log(userId);
 
   const [formData, setFormData] = useState<initialStateProps>(initialFormState);
   const [error, setError] = useState("");
   const [pending, setPending] = useState(false);
   const [msg, setMsg] = useState("");
+  const [file, setFile] = useState(null);
+
   const handleChange = (e: any) => {
     const { name, value } = e.target;
 
@@ -61,7 +65,6 @@ const UploadData = () => {
   };
   const submit = (e: FormEvent<HTMLFormElement>) => {
     // e.preventDefault(); // Prevent the default form submission behavior
-    console.log(formData);
     if (!formData.name || !formData.color || !formData.paragraph)
       return setError("Please fill the complete form");
     if (!formData.userId) return setError("Please Login to continue");
@@ -75,7 +78,6 @@ const UploadData = () => {
     })
       .then((res) => res.json())
       .then((res: { status: string; message: string }) => {
-        console.log(res);
         if (res.status == "201") {
           setMsg(res.message);
         } else {
@@ -139,6 +141,40 @@ const UploadData = () => {
               </SelectContent>
             </Select>
           </div>
+          <div className="grid w-full max-w-sm items-center gap-1.5">
+            <label htmlFor="picture">Picture</label>
+            <Input
+              id="picture"
+              type="file"
+              onChange={(e: any) => setFile(e?.target?.files?.[0])}
+            />
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                const data = new FormData();
+                if (!file) return;
+                data.set("file", file);
+                fetch("/api/v1/upload-image", {
+                  method: "POST",
+
+                  body: data,
+                })
+                  .then((res) => res.json())
+                  .then((res: any) => {
+                    // console.log({ res });
+                    if (res.success) {
+                      setFormData({
+                        ...formData,
+                        imageId: res?.id,
+                      });
+                    }
+                  });
+              }}
+            >
+              Upload
+            </button>
+          </div>
+
           <div className="w-full">
             <button
               type="submit"

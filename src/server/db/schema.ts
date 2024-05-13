@@ -36,3 +36,8 @@ export const dialogs = createTable(
     nameIndex: index("name_idx").on(example.name),
   }),
 );
+export const images = createTable("image", {
+  id: varchar("id").primaryKey(),
+  name: varchar("name").notNull(),
+  url: varchar("url").notNull(),
+});

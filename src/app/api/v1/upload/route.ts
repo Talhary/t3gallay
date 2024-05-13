@@ -2,8 +2,16 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "~/server/db";
 import { dialogs } from "~/server/db/schema";
 import { uuid } from "uuidv4";
+type initialStateProps = {
+  name: string;
+  paragraph: string;
+  userId: string;
+  color: string;
+  imageId?: string;
+};
 export const POST = async (req: NextRequest, res: NextResponse) => {
-  const { name, color, paragraph, userId } = await req.json();
+  const { name, color, paragraph, userId, imageId } =
+    (await req.json()) as initialStateProps;
   // return NextResponse.json({ message: "lol" });
   if (!name || !color || !paragraph || !userId)
     return NextResponse.json({

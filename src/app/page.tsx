@@ -3,11 +3,10 @@ import { auth } from "@clerk/nextjs/server";
 import { ThemeChange } from "components/theme";
 import { db } from "~/server/db";
 
-const colors = ["red", "blue", "yellow", "pink"].map((el) => `bg-${el}-500`);
+// const colors = ["red", "blue", "yellow", "pink"].map((el) => `bg-${el}-500`);
 export const dynamic = "force-dynamic";
 export default async function HomePage() {
-  const user = await auth();
-  // console.log(user);
+  const user = auth();
   const dialogs = await (
     await db.query.dialogs.findMany()
   ).filter((el) => {
@@ -27,7 +26,7 @@ export default async function HomePage() {
           return (
             <div
               key={i + 1}
-              className="w-[200px]  rounded-lg bg-white  px-6 py-8 opacity-90 shadow-md ring-1 ring-slate-900/5 transition-all hover:scale-[1.02] hover:opacity-100 hover:shadow-xl dark:bg-slate-800 max-min-sm:max-w-full"
+              className="max-min-sm:max-w-full  w-[200px] rounded-lg  bg-white px-6 py-8 opacity-90 shadow-md ring-1 ring-slate-900/5 transition-all hover:scale-[1.02] hover:opacity-100 hover:shadow-xl dark:bg-slate-800"
             >
               <div>
                 {/* <div className=" bg-red-500 hidden bg-blue-500 bg-yellow-500 bg-pink-500"></div> */}
