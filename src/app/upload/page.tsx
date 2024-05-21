@@ -151,7 +151,7 @@ const UploadData = () => {
                 </SelectContent>
               </Select>
             </div>
-            <div className="grid hidden w-full max-w-sm items-center gap-1.5">
+            <div className="hidden w-full max-w-sm items-center gap-1.5">
               <label htmlFor="picture">Picture</label>
               <Input
                 id="picture"
