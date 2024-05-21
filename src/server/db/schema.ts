@@ -25,8 +25,9 @@ export const dialogs = createTable(
     imageUrl: varchar("imageUrl", { length: 1024 }),
     name: varchar("name", { length: 256 }).notNull(),
     paragraph: varchar("paragraph", { length: 2024 }).notNull(),
-    color: varchar("color", { length: 50 }).notNull(),
+    color: varchar("color", { length: 50 }),
     userId: varchar("userId", { length: 50 }).notNull(),
+    imgUrl: varchar("imgUrl", { length: 100 }),
     createdAt: timestamp("created_at")
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
