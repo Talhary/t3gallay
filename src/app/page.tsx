@@ -3,12 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { GetImagesFromUserId } from "~/actions/all-images";
 
-import {
-  SignInButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/nextjs";
+import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 // const colors = ["red", "blue", "yellow", "pink"].map((el) => `bg-${el}-500`);
 export const dynamic = "force-dynamic";
 export default async function HomePage() {
@@ -41,7 +36,7 @@ export default async function HomePage() {
       <div className="z-10 mx-auto mt-3 flex w-[97%] flex-row flex-wrap items-start  justify-start gap-x-2 gap-y-1 max-md:justify-center max-md:space-y-4 max-sm:w-full ">
         {dialogs.map((el, i) => {
           return (
-            <Link href={"/photo/" + el.id}>
+            <Link href={`/img/${el.id}`}>
               <div
                 id={el.id}
                 key={i + 1}

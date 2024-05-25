@@ -25,12 +25,14 @@ export const metadata = {
 
 export default function RootLayout({
   children,
+  modal,
 }: {
   children: React.ReactNode;
+  modal: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
-      <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
+      <ClerkProvider>
         <Themeroviders>
           <body className={`font-sans ${inter.variable}`}>
             <nav className="flex items-center justify-between border-b bg-gray-900 p-4 text-white">
@@ -60,9 +62,11 @@ export default function RootLayout({
               </div>
             </nav>
             {children}
+            {modal}
+            <div id="modal-root" />
           </body>
         </Themeroviders>
-      </html>
-    </ClerkProvider>
+      </ClerkProvider>
+    </html>
   );
 }
