@@ -13,7 +13,7 @@ type initialStateProps = {
 export const POST = async (req: NextRequest, res: NextResponse) => {
   const { name, color, paragraph, userId, imgUrl } =
     (await req.json()) as initialStateProps;
-  console.log(imgUrl);
+  console.log(imgUrl);  
   // return NextResponse.json({ message: "lol" });
   if (!name || !paragraph || !userId)
     return NextResponse.json({

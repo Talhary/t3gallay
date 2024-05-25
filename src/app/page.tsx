@@ -2,27 +2,47 @@
 import { auth } from "@clerk/nextjs/server";
 import { ThemeChange } from "components/theme";
 import Link from "next/link";
+import { CiLogin } from "react-icons/ci";
+import { GetImagesFromUserId } from "~/actions/all-images";
 import { cn } from "~/lib/utils";
 import { db } from "~/server/db";
-
+import {
+  ClerkProvider,
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@clerk/nextjs";
 // const colors = ["red", "blue", "yellow", "pink"].map((el) => `bg-${el}-500`);
 export const dynamic = "force-dynamic";
 export default async function HomePage() {
   const user = auth();
-  const dialogs = await (
-    await db.query.dialogs.findMany()
-  ).filter((el) => {
-    return el.userId === user.userId;
-  });
+
   if (!user?.userId) {
-    return <>Please Login</>;
+    return (
+      <div className="flex h-[80vh] w-screen flex-col items-center justify-center gap-y-3">
+        <span className="text-xl">Please Login/signUp to Continue</span>
+        <div className="w-[100%] rounded-md bg-gray-500 p-2 text-center text-2xl">
+          <SignedOut>
+            <SignInButton />
+          </SignedOut>
+        </div>
+      </div>
+    );
   }
+  const dialogs = await GetImagesFromUserId(user?.userId);
+
   return (
     <>
-      <div className="">
-        <ThemeChange />
-      </div>
-
+    
+      {!dialogs?.[0] && (
+        <div className="flex h-[80vh] w-screen flex-col items-center justify-center gap-y-3">
+          <span className="text-xl">Please Upload content to see Here</span>
+          <div className="w-[100%] rounded-md bg-gray-500 p-2 text-center text-2xl">
+            <Link href="/upload">Upload</Link>
+          </div>
+        </div>
+      )}
       <div className="z-10 mx-auto mt-3 flex w-[97%] flex-row flex-wrap items-start  justify-start gap-x-2 gap-y-1 max-md:justify-center max-md:space-y-4 max-sm:w-full ">
         {dialogs.map((el, i) => {
           return (

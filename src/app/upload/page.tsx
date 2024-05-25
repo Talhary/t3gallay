@@ -97,9 +97,7 @@ const UploadData = () => {
 
   return (
     <>
-      <div className="">
-        <ThemeChange />
-      </div>
+     
       <div className="mx-auto flex h-screen w-[300px] items-center">
         <form onSubmit={submit}>
           <div className="card">

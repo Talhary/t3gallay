@@ -11,6 +11,7 @@ import {
 import { Inter } from "next/font/google";
 import Link from "next/link";
 import { Themeroviders } from "./Themeproviders";
+import { ThemeChange } from "components/theme";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -30,31 +31,37 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
-        <body className={`font-sans ${inter.variable}`}>
-          <nav className="flex items-center justify-between border-b bg-gray-900 p-4 text-white">
-            <div className="flex items-center gap-x-3">
-              <Link href="/" className="text-xl font-semibold  ">
-                Gallery
-              </Link>
-              <Link
-                href="/upload"
-                className="text-xl font-semibold text-white "
-              >
-                Upload
-              </Link>
-            </div>
-            <div>
-              <SignedOut>
-                <SignInButton />
-              </SignedOut>
-              <SignedIn>
-                {/* <UploadButton endpoint="imageUploader" /> */}
-                <UserButton />
-              </SignedIn>
-            </div>
-          </nav>
-          <Themeroviders>{children}</Themeroviders>
-        </body>
+        <Themeroviders>
+          <body className={`font-sans ${inter.variable}`}>
+            <nav className="flex items-center justify-between border-b bg-gray-900 p-4 text-white">
+              <div className="relative flex items-center gap-x-3">
+                <Link href="/" className="text-xl font-semibold  ">
+                  Gallery
+                </Link>
+
+                <Link
+                  href="/upload"
+                  className="text-xl font-semibold text-white "
+                >
+                  Upload
+                </Link>
+                <div className="">
+                  <ThemeChange />
+                </div>
+              </div>
+              <div>
+                <SignedOut>
+                  <SignInButton />
+                </SignedOut>
+                <SignedIn>
+                  {/* <UploadButton endpoint="imageUploader" /> */}
+                  <UserButton />
+                </SignedIn>
+              </div>
+            </nav>
+            {children}
+          </body>
+        </Themeroviders>
       </html>
     </ClerkProvider>
   );

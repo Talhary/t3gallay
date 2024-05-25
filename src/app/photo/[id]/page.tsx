@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useTransition } from "react";
-import { getImage } from "./_components/image";
+import { getImage } from "./_components/get-image";
 import { Error } from "./_components/error";
 import { ThemeChange } from "components/theme";
 
@@ -38,9 +38,6 @@ const PhotoPage = ({ params }: { params: { id: string } }) => {
   }
   return (
     <>
-      <div>
-        <ThemeChange />
-      </div>
       <div className=" mx-auto w-[40%]">
         <div className="mx-auto flex   flex-col items-start justify-center bg-gray-500 p-4">
           {data?.imgUrl && <img src={data.imgUrl} />}
