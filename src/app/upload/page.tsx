@@ -44,7 +44,7 @@ const UploadData = () => {
   const [pending, setPending] = useState(false);
   const [msg, setMsg] = useState("");
   const [file, setFile] = useState(null);
-
+  const [isPicUploaded, setIsPicUploaded] = useState(false);
   const handleChange = (e: any) => {
     const { name, value } = e.target;
 
@@ -89,7 +89,7 @@ const UploadData = () => {
         } else {
           setError(res.message);
         }
-        setFormData(initialFormState);
+        // setFormData(initialFormState);
 
         setPending(false);
       });
@@ -97,7 +97,6 @@ const UploadData = () => {
 
   return (
     <>
-     
       <div className="mx-auto flex h-screen w-[300px] items-center">
         <form onSubmit={submit}>
           <div className="card">
@@ -105,7 +104,7 @@ const UploadData = () => {
               <label htmlFor="name">Enter The Name</label>
               <div className="rounded-md border p-2">
                 <input
-                  // disabled={pending}
+                  disabled={pending}
                   id="name"
                   name="name"
                   className="focus:outline-none"
@@ -120,7 +119,7 @@ const UploadData = () => {
               <label htmlFor="paragraph">Enter The Paragraph</label>
               <div className="rounded-md border p-5">
                 <textarea
-                  // disabled={pending}
+                  disabled={pending}
                   id="paragraph"
                   name="paragraph"
                   className="focus:outline-none"
@@ -182,23 +181,29 @@ const UploadData = () => {
                 Upload
               </button>
             </div>
-            <div>
-              <UploadButton
-                endpoint="imageUploader"
-                onClientUploadComplete={(res: any) => {
-                  // Do something with the response
-                  setFormData({ ...formData, imgUrl: res?.[0]?.url });
-                  console.log("res: ", res?.[0].url);
-                  // setMsg("file uploaded");
-                }}
-                onUploadError={(error: Error) => {
-                  // Do something with the error.
-                  setError("Something gone wrong");
-                }}
-              />
-            </div>
+            {!isPicUploaded && (
+              <div>
+                <UploadButton
+                  endpoint="imageUploader"
+                  onClientUploadComplete={(res: any) => {
+                    // Do something with the response
+
+                    setFormData({ ...formData, imgUrl: res?.[0]?.url });
+                    setIsPicUploaded(true);
+                    console.log("res: ", res?.[0].url);
+                    // setMsg("file uploaded");
+                  }}
+                  onUploadError={(error: Error) => {
+                    // Do something with the error.
+                    setError("Something gone wrong");
+                  }}
+                />
+              </div>
+            )}
+            {isPicUploaded && <div>Picture Uploaded</div>}
             <div className="w-full">
               <button
+                disabled={pending}
                 type="submit"
                 className="w-full rounded-md bg-black px-2 py-1 text-white dark:bg-white dark:text-black"
               >

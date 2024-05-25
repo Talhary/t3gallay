@@ -1,13 +1,9 @@
-// import { useUser } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
-import { ThemeChange } from "components/theme";
 import Link from "next/link";
-import { CiLogin } from "react-icons/ci";
+import Image from "next/image";
 import { GetImagesFromUserId } from "~/actions/all-images";
-import { cn } from "~/lib/utils";
-import { db } from "~/server/db";
+
 import {
-  ClerkProvider,
   SignInButton,
   SignedIn,
   SignedOut,
@@ -34,7 +30,6 @@ export default async function HomePage() {
 
   return (
     <>
-    
       {!dialogs?.[0] && (
         <div className="flex h-[80vh] w-screen flex-col items-center justify-center gap-y-3">
           <span className="text-xl">Please Upload content to see Here</span>
@@ -59,11 +54,12 @@ export default async function HomePage() {
                   >
                     {el.imgUrl ? (
                       <>
-                        <img
+                        <Image
+                          alt={el.name}
                           src={el.imgUrl}
                           height={400}
                           width={200}
-                          className="object-contain"
+                          className="object-fill"
                         />
                       </>
                     ) : (
