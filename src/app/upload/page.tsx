@@ -4,7 +4,22 @@ import React, { FormEvent, useState } from "react";
 import Link from "next/link";
 import { Input } from "~/components/ui/input";
 import { Button } from "~/components/ui/button";
+import "@uploadthing/react/styles.css";
+import { initialStateProps } from "types/uploadPageProps";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+}  from "~/components/ui/avatar"
 
+type UploadButtonProps = {
+  /* rest of props */
+  appearance?: {
+    container?: string;
+    button?: string;
+    allowedContent?: string;
+  };
+};
 import {
   Select,
   SelectContent,
@@ -14,18 +29,12 @@ import {
 } from "../../components/ui/select";
 import { UploadButton } from "~/utils/uploadthing";
 import { ThemeChange } from "components/theme";
+import { ItemCard } from "./_components/Item-card";
 const options = [
   { value: "red", label: "red" },
   { value: "blue", label: "blue" },
 ];
-type initialStateProps = {
-  name: string;
-  paragraph: string;
-  userId: string;
-  color?: string;
-  imageId?: string;
-  imgUrl?: string;
-};
+
 
 const UploadData = () => {
   const userId = useUser()?.user?.id;
@@ -97,7 +106,7 @@ const UploadData = () => {
 
   return (
     <>
-      <div className="mx-auto flex h-screen w-[300px] items-center">
+      <div className="mx-auto flex h-screen w-[300px] items-center gap-x-2 ">
         <form onSubmit={submit}>
           <div className="card">
             <div className="flex flex-col gap-y-1">
@@ -184,11 +193,12 @@ const UploadData = () => {
             {!isPicUploaded && (
               <div>
                 <UploadButton
+                  className=" my-3 ut-label:text-lg ut-allowed-content:ut-uploading:text-red-300 "
                   endpoint="imageUploader"
                   onClientUploadComplete={(res: any) => {
                     // Do something with the response
-
-                    setFormData({ ...formData, imgUrl: res?.[0]?.url });
+                    console.log(res)
+                    setFormData({ ...formData, imgUrl: res?.[0]?.url,['image-name']:res?.[0].name });
                     setIsPicUploaded(true);
                     console.log("res: ", res?.[0].url);
                     // setMsg("file uploaded");
@@ -200,7 +210,13 @@ const UploadData = () => {
                 />
               </div>
             )}
-            {isPicUploaded && <div>Picture Uploaded</div>}
+            {isPicUploaded && <div className='my-2 flex items-center justify-between gap-x-1'>
+              <img src={formData.imgUrl} className="md:hidden bg-red-500 flex-2 w-[50%] object-contain rounded-md"/>
+              <div className="flex-1 bg-yellow-500">
+              <h2 >{formData["image-name"]}</h2>
+
+              </div>
+              </div>}
             <div className="w-full">
               <button
                 disabled={pending}
@@ -222,6 +238,10 @@ const UploadData = () => {
             </div>
           </div>
         </form>
+          <div className="max-md:hidden">
+          {isPicUploaded && <ItemCard {...formData}/>}
+
+        </div>
       </div>
     </>
   );

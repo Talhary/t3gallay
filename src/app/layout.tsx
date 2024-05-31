@@ -1,6 +1,9 @@
 import "~/styles/globals.css";
 import "@uploadthing/react/styles.css";
-import { UploadButton } from "../utils/uploadthing";
+import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
+import { extractRouterConfig } from "uploadthing/server";
+ 
+import { ourFileRouter } from "~/app/api/uploadthing/core";
 import {
   ClerkProvider,
   SignInButton,
@@ -56,11 +59,19 @@ export default function RootLayout({
                   <SignInButton />
                 </SignedOut>
                 <SignedIn>
-                  {/* <UploadButton endpoint="imageUploader" /> */}
                   <UserButton />
                 </SignedIn>
               </div>
             </nav>
+            <NextSSRPlugin
+          /**
+           * The `extractRouterConfig` will extract **only** the route configs
+           * from the router to prevent additional information from being
+           * leaked to the client. The data passed to the client is the same
+           * as if you were to fetch `/api/uploadthing` directly.
+           */
+          routerConfig={extractRouterConfig(ourFileRouter)}
+        />
             {children}
             {modal}
             <div id="modal-root" />
