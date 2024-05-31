@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useState, useTransition } from "react";
+import { Suspense, useEffect, useState, useTransition } from "react";
 import { getImage } from "./_components/get-image";
 import { Error } from "./_components/error";
 import { ThemeChange } from "components/theme";
-
+import ClipLoader from 'react-spinners/CircleLoader'
+import CircleLoader from "react-spinners/CircleLoader";
 const PhotoPage = ({ params }: { params: { id: string } }) => {
   const [pending, startTransition] = useTransition();
   const [data, setData] = useState<any>();
@@ -26,7 +27,12 @@ const PhotoPage = ({ params }: { params: { id: string } }) => {
   if (start) {
     return (
       <>
-        {!err && <>Please wait</>}
+        {!err && <><ClipLoader
+
+size={150}
+aria-label="Loading Spinner"
+data-testid="loader"
+/></>}
         <div className="flex h-screen items-center">
           {err && <Error msg={err} />}
         </div>
@@ -34,7 +40,12 @@ const PhotoPage = ({ params }: { params: { id: string } }) => {
     );
   }
   if (!data?.name) {
-    return <> Please wait</>;
+    return <div className='flex h-[80vh] w-screen items-center justify-center'> <CircleLoader
+    
+    size={50}
+    aria-label="Loading Spinner"
+    data-testid="loader"
+  /></div>;
   }
   return (
     <>
@@ -49,4 +60,10 @@ const PhotoPage = ({ params }: { params: { id: string } }) => {
     </>
   );
 };
-export default PhotoPage;
+export default  (props:any)=>{
+  return <Suspense fallback=<>
+    <CircleLoader/>
+  </> >
+    <PhotoPage {...props}/>
+  </Suspense>
+}
